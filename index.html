@@ -3,24 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>สถานะอินเทอร์เน็ต</title>
-
-  <link rel="manifest" href="manifest.json">
+  <title>Net Status</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="box">
-    <h1>เวลาปัจจุบัน</h1>
+    <h1>สถานะอินเทอร์เน็ต</h1>
 
     <div id="time">--:--:--</div>
     <div id="date">----</div>
 
-    <div id="status">กำลังตรวจสอบสถานะเน็ต...</div>
+    <div id="net">Checking...</div>
+    <div id="type">Network: --</div>
 
-    <button id="speedtestBtn">
-      ตรวจสอบความเร็วอินเทอร์เน็ต
-    </button>
+    <button id="speedBtn">เปิด Speedtest</button>
   </div>
 
   <script src="script.js"></script>
