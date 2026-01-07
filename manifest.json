@@ -1,0 +1,15 @@
+{
+  "name": "สถานะอินเทอร์เน็ต",
+  "short_name": "Net Status",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/483/483947.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
