@@ -1,3 +1,6 @@
+/* =====================
+   เวลาไทย
+===================== */
 function updateTime() {
   const now = new Date();
 
@@ -18,31 +21,61 @@ function updateTime() {
       timeZone: "Asia/Bangkok"
     });
 }
-
 updateTime();
 setInterval(updateTime, 1000);
 
-/* ===============================
-   AUTO เปิดเว็บ Speedtest
-================================ */
-setTimeout(() => {
-  window.location.href = "https://www.speedtest.net";
-}, 1500);
+/* =====================
+   สถานะเน็ต
+===================== */
+function updateNetStatus() {
+  const el = document.getElementById("net");
+  el.textContent = navigator.onLine ? "🟢 Online" : "🔴 Offline";
+}
+window.addEventListener("online", updateNetStatus);
+window.addEventListener("offline", updateNetStatus);
+updateNetStatus();
 
-/* ===============================
-   เปิดแอป Speedtest เมื่อแตะครั้งแรก
-================================ */
-let opened = false;
+/* =====================
+   ประเภทเครือข่าย
+===================== */
+function updateNetworkType() {
+  const c = navigator.connection;
+  let text = "Unknown";
+  if (c && c.effectiveType) {
+    text = c.effectiveType.toUpperCase();
+  }
+  document.getElementById("type").textContent = "Network: " + text;
+}
+updateNetworkType();
 
-document.addEventListener("touchstart", () => {
-  if (opened) return;
-  opened = true;
+/* =====================
+   รีเฟรชเมื่อเน็ตกลับ
+===================== */
+window.addEventListener("online", () => {
+  setTimeout(() => location.reload(), 1000);
+});
 
-  // พยายามเปิดแอป
+/* =====================
+   Auto เปิด Speedtest (วันละครั้ง)
+===================== */
+const today = new Date().toDateString();
+if (localStorage.getItem("speedtest") !== today) {
+  localStorage.setItem("speedtest", today);
+  setTimeout(() => {
+    window.location.href = "https://www.speedtest.net";
+  }, 1500);
+}
+
+/* =====================
+   ปุ่ม + แตะครั้งแรก → เปิดแอป
+===================== */
+function openSpeedtest() {
   window.location.href = "speedtest://";
-
-  // fallback ถ้าไม่มีแอป
   setTimeout(() => {
     window.location.href = "https://www.speedtest.net";
   }, 800);
-}, { once: true });
+}
+
+document.getElementById("speedBtn").onclick = openSpeedtest;
+
+document.addEventListener("touchstart", openSpeedtest, { once: true });
